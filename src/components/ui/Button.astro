@@ -1,0 +1,34 @@
+---
+type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonSize = "sm" | "md" | "lg";
+
+interface Props {
+	href: string;
+	variant?: ButtonVariant;
+	size?: ButtonSize;
+	class?: string;
+	[key: string]: unknown;
+}
+
+const { href, variant = "primary", size = "md", class: className = "", ...rest } =
+	Astro.props as Props;
+
+const baseClass =
+	"inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.2em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
+
+const variantClass: Record<ButtonVariant, string> = {
+	primary: "bg-ink text-surface hover:bg-ink/90",
+	secondary: "border border-border bg-surface text-ink hover:bg-bg",
+	ghost: "text-ink hover:text-ink/70"
+};
+
+const sizeClass: Record<ButtonSize, string> = {
+	sm: "min-h-10 px-5 text-[0.7rem]",
+	md: "min-h-12 px-7 text-[0.72rem]",
+	lg: "min-h-14 px-9 text-sm"
+};
+---
+
+<a href={href} class:list={[baseClass, variantClass[variant], sizeClass[size], className]} {...rest}>
+	<slot />
+</a>

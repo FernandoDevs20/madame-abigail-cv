@@ -1,0 +1,20 @@
+---
+import type { ExperienceEntry } from "../../data/experience";
+
+interface Props {
+	entry: ExperienceEntry;
+	delay?: number;
+}
+
+const { entry, delay = 0 } = Astro.props as Props;
+
+const periodClass = entry.highlight ? "text-gold" : "text-muted/55";
+const markerClass = entry.highlight ? "bg-gold" : "bg-border";
+---
+
+<li class="relative pl-10" data-reveal="up" data-reveal-delay={String(delay)}>
+	<span class:list={["absolute left-0 top-[0.35rem] size-3 rounded-full", markerClass]}></span>
+	<p class:list={["text-[0.72rem] font-medium tracking-[0.18em]", periodClass]}>{entry.period}</p>
+	<h3 class="mt-2 text-[1.55rem] leading-tight text-ink sm:text-[1.9rem]">{entry.role}</h3>
+	<p class="mt-3 max-w-[44rem] text-[0.95rem] leading-relaxed text-muted sm:text-[1.05rem]">{entry.description}</p>
+</li>

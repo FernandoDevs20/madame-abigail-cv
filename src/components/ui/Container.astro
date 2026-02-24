@@ -1,0 +1,15 @@
+---
+type ContainerTag = "div" | "header" | "main" | "section" | "nav";
+
+interface Props {
+	as?: ContainerTag;
+	class?: string;
+}
+
+const { as = "div", class: className = "" } = Astro.props;
+const Tag = as;
+---
+
+<Tag class:list={["mx-auto w-full max-w-[84rem] px-4 sm:px-8", className]}>
+	<slot />
+</Tag>

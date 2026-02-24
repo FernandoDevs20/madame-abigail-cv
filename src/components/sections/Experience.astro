@@ -1,0 +1,24 @@
+---
+import { experienceContent } from "../../data/experience";
+import Container from "../ui/Container.astro";
+import TimelineEntry from "../ui/TimelineEntry.astro";
+---
+
+<section id="experiencia" class="bg-bg pb-20 pt-14 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20 bg-white" data-reveal="up">
+	<Container class="lg:px-12 xl:px-16">
+		<div class="mx-auto max-w-[64rem]">
+			<header class="mx-auto max-w-[42rem] text-center">
+				<h2 class="text-[2rem] leading-none text-ink sm:text-[2.6rem]">{experienceContent.title}</h2>
+				<div class="mx-auto mt-3 h-[0.0625rem] w-24 bg-gold/80"></div>
+			</header>
+
+			<ol class="relative mx-auto mt-12 max-w-[56rem] space-y-12 before:absolute before:left-[0.3438rem] before:top-[0.35rem] before:h-[calc(100%-0.7rem)] before:w-[0.0625rem] before:bg-border/60 before:content-[''] sm:mt-14 sm:space-y-14">
+				{
+					experienceContent.entries.map((entry, index) => (
+						<TimelineEntry entry={entry} delay={index * 120} />
+					))
+				}
+			</ol>
+		</div>
+	</Container>
+</section>

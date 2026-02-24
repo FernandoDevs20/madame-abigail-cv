@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import biographyImage from "../../assets/abigail-biografi.webp";
+import { biographyContent } from "../../data/biography";
+import Container from "../ui/Container.astro";
+---
+
+<section id="biografia" class="pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20 bg-white" data-reveal="up">
+	<Container
+		as="div"
+		class="grid items-start gap-8 md:gap-10 lg:grid-cols-[0.95fr_0.85fr] lg:gap-12 lg:px-12 xl:gap-16 xl:px-16"
+	>
+		<div class="max-w-[32rem]">
+			<h2 class="text-[1.85rem] leading-none text-ink sm:text-[2.25rem]">{biographyContent.title}</h2>
+			<div class="mt-3 h-[0.0625rem] w-18 bg-gold/80"></div>
+
+			<p class="mt-6 max-w-[28rem] text-[1.05rem] font-medium italic leading-snug text-muted sm:text-[1.3rem]">
+				{biographyContent.quote}
+			</p>
+
+			<p class="mt-7 max-w-[32rem] text-[0.98rem] leading-relaxed text-muted sm:mt-8 sm:text-[1.05rem]">
+				{biographyContent.description}
+			</p>
+
+			<ul class="mt-8 border-t border-border/70 sm:mt-10">
+				{
+					biographyContent.pillars.map((item, index) => (
+						<li class="flex items-center gap-4 border-b border-border/70 py-3 sm:gap-5 sm:py-4">
+							<span class="text-xs font-medium text-gold sm:text-sm">
+								{String(index + 1).padStart(2, "0")}
+							</span>
+							<span class="text-xs font-medium uppercase tracking-[0.08em] text-muted sm:text-sm">
+								{item}
+							</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div class="w-full">
+			<div class="overflow-hidden border border-border/70 bg-surface shadow-soft">
+				<Image
+					src={biographyImage}
+					alt={biographyContent.image.alt}
+					class="mx-auto aspect-[4/5] w-full max-w-[24rem] object-cover object-center sm:max-w-[28rem] lg:max-w-[30rem]"
+					loading="lazy"
+					sizes="(min-width: 80rem) 30rem, (min-width: 64rem) 38vw, 100vw"
+				/>
+			</div>
+		</div>
+	</Container>
+</section>

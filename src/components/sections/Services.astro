@@ -1,0 +1,24 @@
+---
+import { servicesContent } from "../../data/services";
+import Container from "../ui/Container.astro";
+import ServiceCard from "../ui/ServiceCard.astro";
+---
+
+<section id="servicios" class="bg-bg pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24" data-reveal="up">
+	<Container class="lg:px-10 xl:px-14">
+		<header class="mx-auto max-w-[44rem] text-center">
+			<p class="text-xs font-medium tracking-[0.4em] text-gold sm:text-sm">{servicesContent.eyebrow}</p>
+			<h2 class="mt-4 text-[2.35rem] leading-none text-ink sm:text-[3.2rem]">{servicesContent.title}</h2>
+		</header>
+
+		<div class="mt-10 grid gap-5 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+			{
+				servicesContent.items.map((service, index) => (
+					<div data-reveal="up" data-reveal-delay={String(index * 90)}>
+						<ServiceCard service={service} ctaLabel={servicesContent.ctaLabel} />
+					</div>
+				))
+			}
+		</div>
+	</Container>
+</section>

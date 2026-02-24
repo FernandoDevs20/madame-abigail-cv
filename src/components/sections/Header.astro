@@ -1,0 +1,125 @@
+---
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import { contactNavItem, navigationItems } from "../../data/navigation";
+---
+
+<header class="relative z-30 border-b border-border/70 bg-surface/70 backdrop-blur-md" data-site-header>
+	<Container class="flex h-20 items-center justify-between gap-4">
+		<a href="#inicio" class="font-serif text-sm tracking-[0.35em] text-ink sm:text-base">
+			ABIGAIL VERGARA
+		</a>
+
+		<nav aria-label="Principal" class="hidden lg:block">
+			<ul class="flex items-center gap-10 text-sm font-medium tracking-[0.2em] text-ink/90">
+				{
+					navigationItems.map((item) => (
+						<li>
+							<a href={item.href} class="hover:text-ink/60">
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<Button href={contactNavItem.href} size="sm" class="hidden lg:inline-flex">
+			{contactNavItem.label}
+		</Button>
+
+		<button
+			type="button"
+			class="inline-flex min-h-11 items-center justify-center border border-border px-4 text-xs font-semibold tracking-[0.2em] text-ink lg:hidden"
+			aria-controls="mobile-sidebar"
+			aria-expanded="false"
+			data-menu-open
+		>
+			MENU
+		</button>
+	</Container>
+
+	<div class="fixed inset-0 z-[90] hidden bg-ink/45 lg:hidden" data-backdrop></div>
+
+	<aside
+		id="mobile-sidebar"
+		class="fixed inset-y-0 left-0 z-[100] w-[86vw] max-w-[20rem] -translate-x-full border-r border-border bg-surface p-6 transition-transform duration-300 lg:hidden"
+		aria-label="Mobile navigation"
+		aria-hidden="true"
+		data-sidebar
+	>
+		<div class="mb-10 flex items-center justify-between">
+			<p class="font-serif text-sm tracking-[0.3em] text-ink">MENU</p>
+			<button type="button" class="text-xs font-semibold tracking-[0.2em] text-ink" data-menu-close>
+				CERRAR
+			</button>
+		</div>
+
+		<nav aria-label="Principal mobile">
+			<ul class="space-y-6 text-sm font-semibold tracking-[0.2em] text-ink">
+				{
+					navigationItems.map((item) => (
+						<li>
+							<a href={item.href} class="block hover:text-ink/70" data-mobile-link>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<Button href={contactNavItem.href} class="mt-10 w-full justify-center" data-mobile-link>
+			{contactNavItem.label}
+		</Button>
+	</aside>
+</header>
+
+<script>
+	const siteHeader = document.querySelector("[data-site-header]");
+
+	if (siteHeader instanceof HTMLElement) {
+		const openMenuButton = siteHeader.querySelector("[data-menu-open]");
+		const closeMenuButton = siteHeader.querySelector("[data-menu-close]");
+		const sidebar = siteHeader.querySelector("[data-sidebar]");
+		const backdrop = siteHeader.querySelector("[data-backdrop]");
+		const mobileLinks = siteHeader.querySelectorAll("[data-mobile-link]");
+		const desktopQuery = window.matchMedia("(min-width: 64rem)");
+
+		const setMenuState = (isOpen: boolean) => {
+			if (!(openMenuButton instanceof HTMLButtonElement)) return;
+			if (!(sidebar instanceof HTMLElement)) return;
+			if (!(backdrop instanceof HTMLElement)) return;
+
+			openMenuButton.setAttribute("aria-expanded", String(isOpen));
+			sidebar.setAttribute("aria-hidden", String(!isOpen));
+			sidebar.classList.toggle("-translate-x-full", !isOpen);
+			backdrop.classList.toggle("hidden", !isOpen);
+			document.body.classList.toggle("overflow-hidden", isOpen);
+		};
+
+		if (openMenuButton instanceof HTMLButtonElement) {
+			openMenuButton.addEventListener("click", () => setMenuState(true));
+		}
+
+		if (closeMenuButton instanceof HTMLButtonElement) {
+			closeMenuButton.addEventListener("click", () => setMenuState(false));
+		}
+
+		if (backdrop instanceof HTMLElement) {
+			backdrop.addEventListener("click", () => setMenuState(false));
+		}
+
+		mobileLinks.forEach((link) => {
+			link.addEventListener("click", () => setMenuState(false));
+		});
+
+		window.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") setMenuState(false);
+		});
+
+		desktopQuery.addEventListener("change", (event) => {
+			if (event.matches) setMenuState(false);
+		});
+	}
+</script>

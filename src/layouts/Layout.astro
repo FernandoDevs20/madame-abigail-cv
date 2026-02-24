@@ -1,3 +1,7 @@
+---
+import "../styles/global.css";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,18 +10,42 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Abigail Vergara</title>
+		<script is:inline>
+			document.documentElement.classList.add("js");
+		</script>
 	</head>
 	<body>
 		<slot />
+		<script is:inline>
+			const revealElements = Array.from(document.querySelectorAll("[data-reveal]"));
+			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+			if (revealElements.length > 0 && !prefersReducedMotion && "IntersectionObserver" in window) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add("is-visible");
+							observer.unobserve(entry.target);
+						});
+					},
+					{
+						threshold: 0.15,
+						rootMargin: "0px 0px -8% 0px"
+					}
+				);
+
+				revealElements.forEach((element) => {
+					const revealDelay = Number(element.getAttribute("data-reveal-delay") || 0);
+					if (Number.isFinite(revealDelay) && revealDelay > 0) {
+						element.style.setProperty("--reveal-delay", `${revealDelay}ms`);
+					}
+					observer.observe(element);
+				});
+			} else {
+				revealElements.forEach((element) => element.classList.add("is-visible"));
+			}
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

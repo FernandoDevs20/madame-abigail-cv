@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import { heroContent } from "../../data/hero";
+import officialPortrait from "../../assets/madame-abigail.webp";
+---
+
+<main id="inicio" class="pb-16 pt-10 sm:pt-16 lg:pt-3">
+	<Container as="section" class="grid items-center gap-10 md:gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+		<div class="order-2 lg:order-1">
+			<p class="mb-3 text-[0.66rem] tracking-[0.42em] text-gold sm:mb-8 sm:text-xs">
+				{heroContent.eyebrow}
+			</p>
+
+			<h1 class="max-w-[14ch] text-[2.1rem] leading-[0.96] text-ink sm:text-[2.8rem] xl:text-[4.2rem]">
+				{heroContent.titlePrefix} <span class="font-medium italic">{heroContent.titleEmphasis}</span>{" "}
+				{heroContent.titleSuffix}
+			</h1>
+
+			<p class="mt-6 max-w-[34ch] text-base leading-relaxed text-muted sm:mt-8 sm:text-[1.15rem]">
+				{heroContent.description}
+			</p>
+
+			<div class="mt-9 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-7">
+				<Button href={heroContent.primaryCta.href} size="lg" class="w-full sm:w-auto">
+					{heroContent.primaryCta.label}
+				</Button>
+
+				<a
+					href={heroContent.secondaryCta.href}
+					class="group inline-flex items-center gap-4 text-xs font-semibold tracking-[0.2em] text-ink sm:text-sm"
+				>
+					{heroContent.secondaryCta.label}
+					<span class="h-[0.0625rem] w-11 bg-border transition-all duration-300 group-hover:w-16"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="order-1 relative mx-auto w-full max-w-[35rem] lg:order-2">
+			<div class="absolute -bottom-5 -right-5 h-24 w-24 bg-primary-light/35 sm:-bottom-7 sm:-right-7 sm:h-36 sm:w-36"></div>
+			<div class="relative border border-border/85 bg-surface p-3 shadow-soft sm:p-5">
+				<Image
+					src={officialPortrait}
+					alt={heroContent.portrait.alt}
+					class="h-full w-full object-cover"
+					loading="eager"
+					sizes="(min-width: 64rem) 35rem, 100vw"
+				/>
+			</div>
+		</div>
+	</Container>
+</main>

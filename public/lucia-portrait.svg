@@ -1,0 +1,41 @@
+<svg width="820" height="980" viewBox="0 0 820 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="820" height="980" fill="#E9EAEE"/>
+  <rect x="18" y="18" width="784" height="944" fill="url(#bg)"/>
+  <ellipse cx="413" cy="495" rx="232" ry="278" fill="url(#skin)"/>
+  <path d="M172 648C172 510 235 264 414 264C593 264 655 511 655 648V886H172V648Z" fill="url(#blazer)"/>
+  <path d="M262 438C262 336 332 250 414 250C496 250 566 336 566 438C566 540 496 622 414 622C332 622 262 540 262 438Z" fill="url(#skin2)"/>
+  <path d="M292 386C292 310 346 258 414 258C482 258 536 310 536 386C536 432 520 463 512 472C511 407 468 370 414 370C360 370 317 407 316 472C308 463 292 432 292 386Z" fill="url(#hair)"/>
+  <path d="M238 548C238 444 294 324 414 324C534 324 590 444 590 548C590 574 586 596 578 616C564 527 502 472 414 472C326 472 264 527 250 616C242 596 238 574 238 548Z" fill="url(#hairSoft)"/>
+  <ellipse cx="365" cy="438" rx="18" ry="11" fill="#2D3038"/>
+  <ellipse cx="463" cy="438" rx="18" ry="11" fill="#2D3038"/>
+  <path d="M390 516C398 523 406 527 414 527C422 527 430 523 438 516" stroke="#6F5B5B" stroke-width="7" stroke-linecap="round"/>
+  <path d="M336 700C365 666 387 650 414 650C441 650 463 666 492 700V886H336V700Z" fill="#F3F3F3"/>
+  <path d="M130 887C130 786 196 706 286 706H300V887H130Z" fill="#111520"/>
+  <path d="M520 706H534C624 706 690 786 690 887H520V706Z" fill="#111520"/>
+  <defs>
+    <linearGradient id="bg" x1="410" y1="18" x2="410" y2="962" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F3F4"/>
+      <stop offset="1" stop-color="#E2E2E5"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="413" y1="217" x2="413" y2="773" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E9D6CA"/>
+      <stop offset="1" stop-color="#D8BCAA"/>
+    </linearGradient>
+    <linearGradient id="skin2" x1="414" y1="250" x2="414" y2="622" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0DDCF"/>
+      <stop offset="1" stop-color="#D6B9A7"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="414" y1="258" x2="414" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D3038"/>
+      <stop offset="1" stop-color="#464A57"/>
+    </linearGradient>
+    <linearGradient id="hairSoft" x1="414" y1="324" x2="414" y2="616" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4D525F"/>
+      <stop offset="1" stop-color="#2E3342"/>
+    </linearGradient>
+    <linearGradient id="blazer" x1="414" y1="264" x2="414" y2="886" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2F3340"/>
+      <stop offset="1" stop-color="#10131C"/>
+    </linearGradient>
+  </defs>
+</svg>
