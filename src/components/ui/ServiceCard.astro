@@ -12,14 +12,16 @@ const toneClass = service.tone === "gold" ? "text-gold" : "text-primary";
 const ctaUnderlineClass = service.tone === "gold" ? "bg-gold/60" : "bg-primary/60";
 ---
 
-<article class="flex min-h-116 flex-col border border-border/60 bg-surface px-8 py-8 sm:px-10 sm:py-10">
+<article class="group/card flex min-h-116 flex-col border border-border/60 bg-surface px-8 py-8 transition-all duration-500 hover:-translate-y-1 hover:border-border hover:shadow-soft sm:px-10 sm:py-10">
 	<p class:list={["text-xl font-medium tracking-[0.08em]", toneClass]}>{service.code}</p>
-	<h3 class="mt-6 max-w-[12ch] text-[2rem] leading-tight text-ink sm:text-[2rem]">{service.title}</h3>
-	<p class="mt-5 max-w-[20ch] text-[1rem] leading-relaxed text-muted sm:text-[1.12rem]">
+	<h3 class="mt-6 max-w-[12ch] text-[2rem] leading-tight text-ink transition-colors duration-300 group-hover/card:text-ink/85 sm:text-[2rem]">
+		{service.title}
+	</h3>
+	<p class="mt-5 max-w-[20ch] text-[1rem] leading-relaxed text-muted transition-colors duration-300 group-hover/card:text-muted/85 sm:text-[1.12rem]">
 		{service.description}
 	</p>
 	<a href={service.href} class="group mt-auto inline-flex w-fit flex-col pt-10 text-xs font-semibold tracking-[0.16em] text-ink">
 		{ctaLabel}
-		<span class:list={["mt-2 h-[0.0625rem] w-full transition-colors duration-200", ctaUnderlineClass]}></span>
+		<span class:list={["mt-2 h-[0.0625rem] w-full origin-left transition duration-300 group-hover:scale-x-110", ctaUnderlineClass]}></span>
 	</a>
 </article>

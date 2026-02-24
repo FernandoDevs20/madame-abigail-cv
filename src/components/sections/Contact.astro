@@ -34,7 +34,7 @@ const emailConfig = {
 							type="text"
 							placeholder={contactContent.placeholders.name}
 							required
-							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
+							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none transition-colors duration-300 placeholder:text-muted/30 hover:border-primary/45 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
 						/>
 					</div>
 
@@ -48,7 +48,7 @@ const emailConfig = {
 							type="email"
 							placeholder={contactContent.placeholders.email}
 							required
-							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
+							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none transition-colors duration-300 placeholder:text-muted/30 hover:border-primary/45 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
 						/>
 					</div>
 
@@ -63,7 +63,7 @@ const emailConfig = {
 							inputmode="tel"
 							placeholder={contactContent.placeholders.phone}
 							required
-							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
+							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none transition-colors duration-300 placeholder:text-muted/30 hover:border-primary/45 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
 						/>
 					</div>
 				</div>
@@ -76,7 +76,7 @@ const emailConfig = {
 						id="contact-interest"
 						name="interest"
 						required
-						class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
+						class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none transition-colors duration-300 hover:border-primary/45 focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
 					>
 						<option value="" selected disabled>
 							Seleccione una opcion
@@ -99,14 +99,14 @@ const emailConfig = {
 						rows={3}
 						placeholder={contactContent.placeholders.message}
 						required
-						class="min-h-20 w-full resize-none border-b border-border bg-transparent pb-3 text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:min-h-24 sm:text-[1.2rem]"
+						class="min-h-20 w-full resize-none border-b border-border bg-transparent pb-3 text-[1.05rem] text-ink outline-none transition-colors duration-300 placeholder:text-muted/30 hover:border-primary/45 focus-visible:border-ink sm:min-h-24 sm:text-[1.2rem]"
 					></textarea>
 				</div>
 
 				<button
 					id="contact-submit-button"
 					type="submit"
-					class="flex min-h-14 w-full items-center justify-center bg-ink px-8 text-xs font-semibold tracking-[0.2em] text-surface transition-colors duration-200 hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+					class="flex min-h-14 w-full items-center justify-center bg-ink px-8 text-xs font-semibold tracking-[0.2em] text-surface transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
 				>
 					{contactContent.submitLabel}
 				</button>

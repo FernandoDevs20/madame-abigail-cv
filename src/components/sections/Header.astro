@@ -4,40 +4,43 @@ import Button from "../ui/Button.astro";
 import { contactNavItem, navigationItems } from "../../data/navigation";
 ---
 
-<div class="relative" data-site-header>
-	<header class="relative border-b border-border/70 bg-surface/70 backdrop-blur-md">
+<div class="relative h-20" data-site-header>
+	<header class="fixed inset-x-0 top-0 z-[800] border-b border-border/70 bg-surface/70 backdrop-blur-md">
 		<Container class="flex h-20 items-center justify-between gap-4">
-			<a href="#inicio" class="font-serif text-sm tracking-[0.35em] text-ink sm:text-base">
+			<a href="#inicio" class="font-serif text-sm tracking-[0.35em] text-ink transition-colors duration-300 hover:text-ink/70 sm:text-base">
 				ABIGAIL VERGARA
 			</a>
 
-		<nav aria-label="Principal" class="hidden lg:block">
-			<ul class="flex items-center gap-10 text-sm font-medium tracking-[0.2em] text-ink/90">
-				{
-					navigationItems.map((item) => (
-						<li>
-							<a href={item.href} class="hover:text-ink/60">
-								{item.label}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
+			<nav aria-label="Principal" class="hidden lg:block">
+				<ul class="flex items-center gap-10 text-sm font-medium tracking-[0.2em] text-ink/90">
+					{
+						navigationItems.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									class="relative pb-1 transition-colors duration-300 hover:text-ink/60 after:absolute after:inset-x-0 after:bottom-0 after:h-[0.0625rem] after:origin-left after:scale-x-0 after:bg-gold/80 after:transition-transform after:duration-300 hover:after:scale-x-100"
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
 
-		<Button href={contactNavItem.href} size="sm" class="hidden lg:inline-flex">
-			{contactNavItem.label}
-		</Button>
+			<Button href={contactNavItem.href} size="sm" class="hidden lg:inline-flex">
+				{contactNavItem.label}
+			</Button>
 
-		<button
-			type="button"
-			class="inline-flex min-h-11 items-center justify-center border border-border px-4 text-xs font-semibold tracking-[0.2em] text-ink lg:hidden"
-			aria-controls="mobile-sidebar"
-			aria-expanded="false"
-			data-menu-open
-		>
-			MENU
-		</button>
+			<button
+				type="button"
+				class="inline-flex min-h-11 items-center justify-center border border-border px-4 text-xs font-semibold tracking-[0.2em] text-ink transition-colors duration-300 hover:border-primary/40 hover:text-ink/70 lg:hidden"
+				aria-controls="mobile-sidebar"
+				aria-expanded="false"
+				data-menu-open
+			>
+				MENU
+			</button>
 		</Container>
 	</header>
 
@@ -65,7 +68,7 @@ import { contactNavItem, navigationItems } from "../../data/navigation";
 				{
 					navigationItems.map((item) => (
 						<li>
-							<a href={item.href} class="block hover:text-ink/70" data-mobile-link>
+							<a href={item.href} class="block transition-colors duration-300 hover:text-ink/70" data-mobile-link>
 								{item.label}
 							</a>
 						</li>

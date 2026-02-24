@@ -31,6 +31,7 @@
 
 	html {
 		font-size: 90%;
+		scroll-behavior: smooth;
 	}
 
 	body {
@@ -48,6 +49,21 @@
 
 	a {
 		@apply transition-colors duration-200;
+	}
+
+	#scroll-progress {
+		--scroll-progress: 0;
+		position: fixed;
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		height: 0.125rem;
+		width: 100%;
+		transform: scaleX(var(--scroll-progress));
+		transform-origin: 0 50%;
+		background: linear-gradient(90deg, var(--color-gold), var(--color-primary));
+		box-shadow: 0 0 0.75rem rgb(215 179 92 / 0.35);
+		pointer-events: none;
+		z-index: 900;
 	}
 }
 

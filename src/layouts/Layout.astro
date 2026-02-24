@@ -15,8 +15,33 @@ import "../styles/global.css";
 		</script>
 	</head>
 	<body>
+		<div id="scroll-progress" aria-hidden="true"></div>
 		<slot />
 		<script is:inline>
+			const progressBar = document.getElementById("scroll-progress");
+
+			let progressFrame = 0;
+			const updateScrollProgress = () => {
+				if (!(progressBar instanceof HTMLElement)) return;
+
+				const scrollTop = window.scrollY || window.pageYOffset;
+				const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+				const progress = scrollRange > 0 ? Math.min(scrollTop / scrollRange, 1) : 0;
+				progressBar.style.setProperty("--scroll-progress", String(progress));
+			};
+
+			const requestProgressUpdate = () => {
+				if (progressFrame) return;
+				progressFrame = window.requestAnimationFrame(() => {
+					progressFrame = 0;
+					updateScrollProgress();
+				});
+			};
+
+			requestProgressUpdate();
+			window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+			window.addEventListener("resize", requestProgressUpdate);
+
 			const revealElements = Array.from(document.querySelectorAll("[data-reveal]"));
 			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

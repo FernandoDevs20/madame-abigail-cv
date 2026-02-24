@@ -25,11 +25,11 @@ import Container from "../ui/Container.astro";
 			<ul class="mt-8 border-t border-border/70 sm:mt-10">
 				{
 					biographyContent.pillars.map((item, index) => (
-						<li class="flex items-center gap-4 border-b border-border/70 py-3 sm:gap-5 sm:py-4">
-							<span class="text-xs font-medium text-gold sm:text-sm">
+						<li class="group flex items-center gap-4 border-b border-border/70 py-3 transition-colors duration-300 hover:border-primary/25 sm:gap-5 sm:py-4">
+							<span class="text-xs font-medium text-gold transition-colors duration-300 group-hover:text-primary sm:text-sm">
 								{String(index + 1).padStart(2, "0")}
 							</span>
-							<span class="text-xs font-medium uppercase tracking-[0.08em] text-muted sm:text-sm">
+							<span class="text-xs font-medium uppercase tracking-[0.08em] text-muted transition-colors duration-300 group-hover:text-ink/85 sm:text-sm">
 								{item}
 							</span>
 						</li>
@@ -39,11 +39,11 @@ import Container from "../ui/Container.astro";
 		</div>
 
 		<div class="w-full">
-			<div class="overflow-hidden border border-border/70 bg-surface shadow-soft">
+			<div class="group overflow-hidden border border-border/70 bg-surface shadow-soft transition-all duration-500 hover:-translate-y-1 hover:border-border hover:shadow-soft">
 				<Image
 					src={biographyImage}
 					alt={biographyContent.image.alt}
-					class="mx-auto aspect-[4/5] w-full max-w-[24rem] object-cover object-center sm:max-w-[28rem] lg:max-w-[30rem]"
+					class="mx-auto aspect-[4/5] w-full max-w-[24rem] object-cover object-center transition-transform duration-700 group-hover:scale-[1.03] sm:max-w-[28rem] lg:max-w-[30rem]"
 					loading="lazy"
 					sizes="(min-width: 80rem) 30rem, (min-width: 64rem) 38vw, 100vw"
 				/>
