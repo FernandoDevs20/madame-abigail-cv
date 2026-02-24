@@ -1,6 +1,12 @@
 ---
 import Container from "../ui/Container.astro";
 import { contactContent } from "../../data/contact";
+
+const emailConfig = {
+	serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "default_service",
+	templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? "template_gj4242o",
+	publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? ""
+};
 ---
 
 <section id="contacto" class="bg-bg pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24 bg-white" data-reveal="up">
@@ -16,7 +22,7 @@ import { contactContent } from "../../data/contact";
 				</p>
 			</header>
 
-			<form class="mt-12 space-y-8 sm:mt-14 sm:space-y-10">
+			<form id="contact-form" class="mt-12 space-y-8 sm:mt-14 sm:space-y-10">
 				<div class="grid gap-8 md:grid-cols-2 md:gap-10">
 					<div class="space-y-3">
 						<label for="contact-name" class="text-[0.62rem] font-medium tracking-[0.2em] text-muted/70 sm:text-[0.68rem]">
@@ -70,7 +76,7 @@ import { contactContent } from "../../data/contact";
 						id="contact-interest"
 						name="interest"
 						required
-							class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
+						class="h-12 w-full border-b border-border bg-transparent text-[1.05rem] text-ink outline-none focus-visible:border-ink sm:h-14 sm:text-[1.2rem]"
 					>
 						<option value="" selected disabled>
 							Seleccione una opcion
@@ -93,17 +99,79 @@ import { contactContent } from "../../data/contact";
 						rows={3}
 						placeholder={contactContent.placeholders.message}
 						required
-							class="min-h-20 w-full resize-none border-b border-border bg-transparent pb-3 text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:min-h-24 sm:text-[1.2rem]"
+						class="min-h-20 w-full resize-none border-b border-border bg-transparent pb-3 text-[1.05rem] text-ink outline-none placeholder:text-muted/30 focus-visible:border-ink sm:min-h-24 sm:text-[1.2rem]"
 					></textarea>
 				</div>
 
 				<button
+					id="contact-submit-button"
 					type="submit"
-					class="flex min-h-14 w-full items-center justify-center bg-ink px-8 text-xs font-semibold tracking-[0.2em] text-surface transition-colors duration-200 hover:bg-ink/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+					class="flex min-h-14 w-full items-center justify-center bg-ink px-8 text-xs font-semibold tracking-[0.2em] text-surface transition-colors duration-200 hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
 				>
 					{contactContent.submitLabel}
 				</button>
+				<p id="contact-feedback" class="hidden text-center text-[0.72rem] font-medium tracking-[0.1em]" aria-live="polite"></p>
 			</form>
 		</div>
 	</Container>
 </section>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script define:vars={{ emailConfig }} is:inline>
+	const form = document.getElementById("contact-form");
+	const submitButton = document.getElementById("contact-submit-button");
+	const feedback = document.getElementById("contact-feedback");
+
+	const setFeedback = (message, tone) => {
+		if (!(feedback instanceof HTMLElement)) return;
+		feedback.textContent = message;
+		feedback.classList.remove("hidden");
+
+		if (tone === "success") feedback.style.color = "var(--color-ink)";
+		else if (tone === "error") feedback.style.color = "var(--color-primary-hover)";
+		else feedback.style.color = "var(--color-muted)";
+	};
+
+	if (form instanceof HTMLFormElement && submitButton instanceof HTMLButtonElement) {
+		const defaultButtonText = submitButton.textContent?.trim() ?? "ENVIAR SOLICITUD";
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			if (!emailConfig.publicKey) {
+				setFeedback("Configura PUBLIC_EMAILJS_PUBLIC_KEY para habilitar envios.", "error");
+				return;
+			}
+
+			const emailjsLib = window.emailjs;
+			if (!emailjsLib || typeof emailjsLib.sendForm !== "function") {
+				setFeedback("No se pudo cargar el servicio de correo. Intenta recargar.", "error");
+				return;
+			}
+
+			submitButton.disabled = true;
+			submitButton.textContent = "ENVIANDO...";
+			setFeedback("Enviando solicitud...", "info");
+
+			try {
+				await emailjsLib.sendForm(
+					emailConfig.serviceId,
+					emailConfig.templateId,
+					form,
+					{
+						publicKey: emailConfig.publicKey
+					}
+				);
+
+				form.reset();
+				setFeedback("Solicitud enviada correctamente. Te contactaremos pronto.", "success");
+			} catch (error) {
+				console.error("EmailJS error:", error);
+				setFeedback("No se pudo enviar la solicitud. Intenta nuevamente.", "error");
+			} finally {
+				submitButton.disabled = false;
+				submitButton.textContent = defaultButtonText;
+			}
+		});
+	}
+</script>
